@@ -7,11 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("servlets")
+@WebServlet("login")
+
 public class Servlets extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("get passou");
+      String username = req.getParameter("username");
+      String password = req.getParameter("password");
     }
 }

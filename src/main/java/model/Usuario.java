@@ -49,7 +49,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuarios{" +
+        return "Usuario{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", idade=" + idade +
@@ -57,5 +57,3 @@ public class Usuario {
                 '}';
     }
 }
-
-
