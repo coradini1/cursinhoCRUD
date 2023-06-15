@@ -36,9 +36,9 @@ public class UsuarioDao {
 
         if (rs.next()) {
             Usuario usuario = new Usuario();
+            usuario.setId(rs.getInt("id"));
             usuario.setNome(rs.getString("nome"));
             usuario.setIdade(rs.getInt("idade"));
-            usuario.setSenha(rs.getString("senha"));
             usuario.setTipoUsuario(TipoUsuario.valueOf(rs.getString("tipoUsuario")));
             return usuario;
         }

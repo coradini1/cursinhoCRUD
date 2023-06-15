@@ -8,12 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/registrarcurso")
-public class RegistrarCursoServlet extends HttpServlet {
+@WebServlet("/atualizar-curso")
+public class AtualizarCursoServlet extends HttpServlet {
     private CursoDao cursoDao;
 
     @Override
@@ -23,21 +22,21 @@ public class RegistrarCursoServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
         String nome = request.getParameter("nome");
         String descricao = request.getParameter("descricao");
-        String contextPath = request.getContextPath();
-        HttpSession session = request.getSession(false);
-        int professorId = (int) session.getAttribute("userId"); // Retrieve the professor's ID from the session
 
-        Curso curso = new Curso(nome, descricao, professorId);
+        Curso curso = new Curso();
+        curso.setId(id);
+        curso.setNome(nome);
+        curso.setDescricao(descricao);
+
         try {
-            System.out.println(curso.getProfessorId());
-            cursoDao.createCurso(curso); // Pass both curso and professorId to the createCurso method
+            cursoDao.updateCurso(curso);
             response.sendRedirect(request.getContextPath() + "/listarcursos");
         } catch (SQLException e) {
             e.printStackTrace();
-            response.sendRedirect("erro.jsp");
+            response.sendRedirect(request.getContextPath() + "/erro.jsp");
         }
     }
-
 }

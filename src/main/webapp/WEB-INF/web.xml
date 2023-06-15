@@ -24,4 +24,14 @@
     <url-pattern>/registrar-curso</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>EditarCursoServlet</servlet-name>
+    <servlet-class>controller.EditarCursoServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>EditarCursoServlet</servlet-name>
+    <url-pattern>/editar-curso</url-pattern>
+  </servlet-mapping>
+
 </web-app>

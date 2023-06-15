@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
-    <title>Menu</title>
+    <title>Listar Cursos</title>
 </head>
 
 <body>
@@ -33,17 +33,7 @@
                 <a class="nav-link" href="#">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Services</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/registrar/registrar-curso.jsp">Registrar Curso</a>
-
             </li>
         </ul>
         <span class="navbar-text">
@@ -54,14 +44,30 @@
 </nav>
 
 <div class="container">
-    <h1>Welcome to the Menu Page</h1>
-    <h2>List of Courses</h2>
-    <ul>
+    <h1>List of Courses</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
         <c:forEach items="${cursos}" var="curso">
-            <li>${curso.nome} - ${curso.descricao}</li>
+            <tr>
+                <td>${curso.id}</td>
+                <td>${curso.nome}</td>
+                <td>${curso.descricao}</td>
+                <td>
+                    <a href="${pageContext.request.contextPath}/editar-curso?id=${curso.id}" class="btn btn-primary">Editar</a>
+                    <a href="${pageContext.request.contextPath}/remover-curso?id=${curso.id}" class="btn btn-danger">Remover</a>
+                </td>
+            </tr>
         </c:forEach>
-    </ul>
-    <!-- Other content goes here -->
+        </tbody>
+    </table>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

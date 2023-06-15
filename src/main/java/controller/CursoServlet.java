@@ -28,7 +28,7 @@ public class CursoServlet extends HttpServlet {
 
         Curso curso = new Curso(nome, descricao, professorId);
         try {
-            cursoDao.createCurso(curso, professorId);
+            cursoDao.createCurso(curso);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

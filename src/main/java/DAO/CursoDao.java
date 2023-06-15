@@ -1,5 +1,7 @@
 package DAO;
 
+import model.Curso;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,78 +9,73 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Curso;
-
 public class CursoDao {
     private Connection conn;
 
     public CursoDao() {
-        this.conn = new MySqlConnection().getConexao();
+        conn = new MySqlConnection().getConexao();
     }
 
-    public void createCurso(Curso curso, int professorId) throws SQLException {
+    public void createCurso(Curso curso) throws SQLException {
         String sql = "INSERT INTO Cursos (nome, descricao, professor_id) VALUES (?, ?, ?)";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, curso.getNome());
-        stmt.setString(2, curso.getDescricao());
-        stmt.setInt(3, professorId);
-        stmt.executeUpdate();
-        stmt.close();
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, curso.getNome());
+            stmt.setString(2, curso.getDescricao());
+            stmt.setInt(3, curso.getProfessorId());
+            stmt.executeUpdate();
+        }
     }
 
     public Curso getCursoById(int id) throws SQLException {
         String sql = "SELECT * FROM Cursos WHERE id = ?";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setInt(1, id);
-        ResultSet rs = stmt.executeQuery();
-
-        Curso curso = null;
-        if (rs.next()) {
-            curso = new Curso();
-            curso.setId(rs.getInt("id"));
-            curso.setNome(rs.getString("nome"));
-            curso.setDescricao(rs.getString("descricao"));
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    Curso curso = new Curso();
+                    curso.setId(rs.getInt("id"));
+                    curso.setNome(rs.getString("nome"));
+                    curso.setDescricao(rs.getString("descricao"));
+                    return curso;
+                }
+            }
         }
-
-        rs.close();
-        stmt.close();
-        return curso;
+        return null;
     }
 
     public List<Curso> getAllCursos() throws SQLException {
         String sql = "SELECT * FROM Cursos";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        ResultSet rs = stmt.executeQuery();
-
-        List<Curso> cursos = new ArrayList<>();
-        while (rs.next()) {
-            Curso curso = new Curso();
-            curso.setId(rs.getInt("id"));
-            curso.setNome(rs.getString("nome"));
-            curso.setDescricao(rs.getString("descricao"));
-            cursos.add(curso);
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            try (ResultSet rs = stmt.executeQuery()) {
+                List<Curso> cursos = new ArrayList<>();
+                while (rs.next()) {
+                    Curso curso = new Curso();
+                    curso.setId(rs.getInt("id"));
+                    curso.setNome(rs.getString("nome"));
+                    curso.setDescricao(rs.getString("descricao"));
+                    cursos.add(curso);
+                }
+                System.out.println(cursos);
+                return cursos;
+            }
         }
-
-        rs.close();
-        stmt.close();
-        return cursos;
     }
 
     public void updateCurso(Curso curso) throws SQLException {
         String sql = "UPDATE Cursos SET nome = ?, descricao = ? WHERE id = ?";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, curso.getNome());
-        stmt.setString(2, curso.getDescricao());
-        stmt.setInt(3, curso.getId());
-        stmt.executeUpdate();
-        stmt.close();
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, curso.getNome());
+            stmt.setString(2, curso.getDescricao());
+            stmt.setInt(3, curso.getId());
+            stmt.executeUpdate();
+        }
     }
 
     public void deleteCurso(int id) throws SQLException {
         String sql = "DELETE FROM Cursos WHERE id = ?";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setInt(1, id);
-        stmt.executeUpdate();
-        stmt.close();
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        }
     }
 }

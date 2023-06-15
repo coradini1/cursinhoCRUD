@@ -31,12 +31,13 @@ public class LoginServlet extends HttpServlet {
 
             String contextPath = request.getContextPath();
             if (usuario != null) {
-                // Successful login, set the "username" attribute in the session
+                // Successful login, set the "username" and "userId" attributes in the session
                 HttpSession session = request.getSession();
                 session.setAttribute("username", usuario.getNome());
-
+                session.setAttribute("userId", usuario.getId()); // Assuming the ID property in Usuario is named "id"
+                System.out.println("User ID: " + usuario.getId());
                 // Redirect to the menu page or any other desired page
-                response.sendRedirect(response.encodeRedirectURL(contextPath + "/view/menu.jsp"));
+                response.sendRedirect(response.encodeRedirectURL(contextPath + "/listarcursos"));
             } else {
                 // Invalid username or password, redirect back to the login page
                 response.sendRedirect(response.encodeRedirectURL(contextPath + "/index.jsp"));
@@ -48,4 +49,5 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect(response.encodeRedirectURL(contextPath + "/erro.jsp"));
         }
     }
+
 }
