@@ -6,7 +6,6 @@ public class Curso {
     private String descricao;
     private int professorId;
 
-    // Constructors
     public Curso() {
     }
 
@@ -22,7 +21,6 @@ public class Curso {
     }
 
 
-    // Getters and setters
     public int getId() {
         return id;
     }

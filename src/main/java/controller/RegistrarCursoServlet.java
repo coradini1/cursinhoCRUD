@@ -24,7 +24,6 @@ public class RegistrarCursoServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Adicionando a verificação do tipo de usuário
         TipoUsuario tipoUsuario = (TipoUsuario) request.getSession().getAttribute("tipoUsuario");
         if (tipoUsuario.equals(TipoUsuario.aluno)) {
             response.sendRedirect("erro.jsp");
@@ -33,14 +32,13 @@ public class RegistrarCursoServlet extends HttpServlet {
 
         String nome = request.getParameter("nome");
         String descricao = request.getParameter("descricao");
-        String contextPath = request.getContextPath();
         HttpSession session = request.getSession(false);
-        int professorId = (int) session.getAttribute("userId"); // Retrieve the professor's ID from the session
+        int professorId = (int) session.getAttribute("userId");
 
         Curso curso = new Curso(nome, descricao, professorId);
         try {
             System.out.println(curso.getProfessorId());
-            cursoDao.createCurso(curso); // Pass both curso and professorId to the createCurso method
+            cursoDao.createCurso(curso);
             response.sendRedirect(request.getContextPath() + "/listarcursos");
         } catch (SQLException e) {
             e.printStackTrace();

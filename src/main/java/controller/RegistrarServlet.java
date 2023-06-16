@@ -38,7 +38,6 @@ public class RegistrarServlet extends HttpServlet {
 
         try {
             if (usuarioDao.getUserByName(nome) != null) {
-                // Username already taken, display an error message
                 request.setAttribute("errorMessage", "O nome de usuário já está em uso. Por favor, escolha outro nome.");
                 if(!response.isCommitted()) {
                     request.getRequestDispatcher("/registrar/registrar.jsp").forward(request, response);
@@ -52,14 +51,11 @@ public class RegistrarServlet extends HttpServlet {
                 usuario.setTipoUsuario(tipoUsuario);
 
                 usuarioDao.create(usuario);
-                // Redirect to a confirmation page
                 response.sendRedirect(request.getContextPath() + "/index.jsp");
                 return;
             }
         } catch (SQLException e) {
-            // Handle database-related errors
             e.printStackTrace();
-            // Redirect to an error page
             if(!response.isCommitted()) {
                 response.sendRedirect(request.getContextPath() + "/erro.jsp");
             }

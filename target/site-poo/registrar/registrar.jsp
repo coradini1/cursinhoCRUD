@@ -11,7 +11,7 @@
 
 <body>
 <div class="container">
-    <h1>Cadastrar Usuário</h1>
+    <h1>Cadastrar Usuario</h1>
     <form action="${pageContext.request.contextPath}/registrarUser" method="POST">
         <div class="form-group">
             <label for="nome">Usuario</label>

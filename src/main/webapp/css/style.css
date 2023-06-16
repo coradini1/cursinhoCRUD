@@ -48,6 +48,12 @@ button {
 
 /* Estilos para o link de registro */
 a.btn-register {
+    color: blue;
+    margin-left: 10px;
+}
+
+a.btn-back{
+    color: blue;
     margin-left: 10px;
 }
 

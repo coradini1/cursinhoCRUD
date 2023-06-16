@@ -21,8 +21,10 @@
             <label for="password">Senha</label>
             <input type="password" name="password" class="form-control" id="password" placeholder="Insira sua senha">
         </div>
-        <button type="submit" class="btn btn-primary">Entrar</button>
-        <a href="registrar/registrar.jsp" class="btn btn-primary btn-register">Registrar</a>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Entrar</button>
+            <a href="registrar/registrar.jsp" class="btn btn-primary btn-register">Registrar</a>
+        </div>
     </form>
 </div>
 

@@ -16,6 +16,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
+    <style>
+        .navbar-text strong {
+            color: white;
+        }
+    </style>
     <title>Edit Course</title>
 </head>
 
@@ -32,30 +37,30 @@
                 <a class="nav-link" href="${pageContext.request.contextPath}/listarcursos">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/registrar/registrar-curso.jsp">Registrar Curso</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/registrar/registrar-curso.jsp"><strong>Registrar Curso</a>
             </li>
         </ul>
         <span class="navbar-text">
-            Logged in as <strong><%= session.getAttribute("username") %></strong>
+            Logado como <strong><%= session.getAttribute("username") %></strong>
         </span>
         <a href="logout.jsp" class="btn btn-danger ml-3">Logout</a>
     </div>
 </nav>
 
 <div class="container">
-    <h1>Edit Course</h1>
+    <h1>Editar Curso</h1>
     <form action="${pageContext.request.contextPath}/atualizar-curso" method="POST">
         <input type="hidden" name="id" value="${curso.id}">
         <div class="form-group">
-            <label >Name:</label>
+            <label>Nome do curso:</label>
             <input type="text" name="nome" class="form-control" required value="${curso.nome}">
         </div>
         <div class="form-group">
-            <label >Description:</label>
+            <label>Descrição do curso:</label>
             <textarea name="descricao" required class="form-control">${curso.descricao}</textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Update</button>
-        <button type="submit" href="menu.jsp" class="btn btn-secondary">Voltar</button>
+        <button type="submit" class="btn btn-primary">Atualizar</button>
+        <a href="${pageContext.request.contextPath}/listarcursos" class="btn btn-secondary">Voltar</a>
     </form>
 </div>
 

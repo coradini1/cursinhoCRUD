@@ -19,6 +19,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
+    <style>
+        .navbar-text strong {
+            color: white;
+        }
+
+        .content-section {
+            margin-top: 20px;
+        }
+    </style>
     <title>Listar Cursos</title>
 </head>
 
@@ -36,7 +45,7 @@
             </li>
             <% if (!tipoUsuario.equals(TipoUsuario.aluno)) { %>
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/registrar/registrar-curso.jsp">Registrar Curso</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/registrar/registrar-curso.jsp"><strong>Registrar Curso</strong></a>
             </li>
             <% } %>
         </ul>
@@ -47,7 +56,7 @@
     </div>
 </nav>
 
-<div class="container">
+<div class="container content-section">
     <h1>Lista de cursos cadastrados</h1>
     <table class="table">
         <thead>

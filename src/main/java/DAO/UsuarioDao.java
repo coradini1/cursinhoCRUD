@@ -47,7 +47,7 @@ public class UsuarioDao {
             return usuario;
         }
 
-        return null; // User not found
+        return null;
     }
 
     public Usuario getUserByName(String username) throws SQLException {
@@ -65,7 +65,7 @@ public class UsuarioDao {
             return usuario;
         }
 
-        return null; // User not found
+        return null;
     }
 
     private boolean isUsernameTaken(String username) throws SQLException {
