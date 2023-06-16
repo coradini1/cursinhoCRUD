@@ -14,8 +14,8 @@
     <h1>Cadastrar Usuário</h1>
     <form action="${pageContext.request.contextPath}/registrarUser" method="POST">
         <div class="form-group">
-            <label for="nome">Usuário</label>
-            <input type="text" name="nome" class="form-control" id="nome" required placeholder="Insira seu nome de usuário">
+            <label for="nome">Usuario</label>
+            <input type="text" name="nome" class="form-control" id="nome" required placeholder="Insira seu nome de usuario">
         </div>
         <div class="form-group">
             <label for="senha">Senha</label>
@@ -26,14 +26,14 @@
             <input type="number" name="idade" id="idade" class="form-control" max="105" required placeholder="Insira sua idade">
         </div>
         <div class="form-group">
-            <label for="tipoUsuario">Escolha seu tipo de usuário:</label>
+            <label for="tipoUsuario">Escolha seu tipo de usuario:</label>
             <select name="tipoUsuario" id="tipoUsuario" class="form-control" required>
                 <option value="">Nenhum</option>
                 <option value="aluno">Aluno</option>
                 <option value="professor">Professor</option>
             </select>
         </div>
-        <button type="submit" name="opcao" class="btn btn-primary" value="Cadastrar">Cadastrar Usuário</button>
+        <button type="submit" name="opcao" class="btn btn-primary" value="Cadastrar">Cadastrar Usuario</button>
         <a href="${pageContext.request.contextPath}/index.jsp" class="btn btn-back">Voltar</a>
     </form>
 </div>

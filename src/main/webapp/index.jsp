@@ -14,8 +14,8 @@
     <h1>Login</h1>
     <form action="login" method="POST">
         <div class="form-group">
-            <label for="username">Usuário</label>
-            <input type="text" name="username" class="form-control" id="username" placeholder="Insira o seu nome de usuário">
+            <label for="username">Usuario</label>
+            <input type="text" name="username" class="form-control" id="username" placeholder="Insira o seu nome de usuario">
         </div>
         <div class="form-group">
             <label for="password">Senha</label>
