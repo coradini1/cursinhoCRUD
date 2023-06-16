@@ -17,6 +17,10 @@ public class UsuarioDao {
     }
 
     public void create(Usuario usuario) throws SQLException {
+        if (isUsernameTaken(usuario.getNome())) {
+            throw new SQLException("Username is already taken.");
+        }
+
         String sql = "INSERT INTO usuarios (nome, idade, senha, tipoUsuario) VALUES (?, ?, ?, ?)";
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(1, usuario.getNome());
@@ -44,5 +48,35 @@ public class UsuarioDao {
         }
 
         return null; // User not found
+    }
+
+    public Usuario getUserByName(String username) throws SQLException {
+        String sql = "SELECT * FROM usuarios WHERE nome = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, username);
+        ResultSet rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            Usuario usuario = new Usuario();
+            usuario.setId(rs.getInt("id"));
+            usuario.setNome(rs.getString("nome"));
+            usuario.setIdade(rs.getInt("idade"));
+            usuario.setTipoUsuario(TipoUsuario.valueOf(rs.getString("tipoUsuario")));
+            return usuario;
+        }
+
+        return null; // User not found
+    }
+
+    private boolean isUsernameTaken(String username) throws SQLException {
+        String sql = "SELECT COUNT(*) AS count FROM usuarios WHERE nome = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, username);
+        ResultSet rs = stmt.executeQuery();
+        rs.next();
+        int count = rs.getInt("count");
+        rs.close();
+        stmt.close();
+        return count > 0;
     }
 }

@@ -1,73 +1,59 @@
+/* style.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+/* Estilos para o corpo da página */
 body {
-    background-color: #000;
-    color: #fff;
-    font-family: "Arial", sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
+/* Estilos para o contêiner */
 .container {
-    margin: 100px auto;
-    max-width: 400px;
+    width: 100%;
+    max-width: 400px; /* Defina a largura máxima desejada para o contêiner */
+    padding: 20px;
+}
+
+/* Estilos para o título */
+h1 {
     text-align: center;
 }
 
-.container h1 {
-    margin-bottom: 30px;
-    font-size: 28px;
-    letter-spacing: 2px;
+/* Estilos para os rótulos */
+label {
+    color: white;
 }
 
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    font-weight: bold;
-    font-size: 16px;
-    letter-spacing: 1px;
-}
-
-.form-control {
-    background-color: transparent;
-    border: none;
-    border-bottom: 1px solid #fff;
-    border-radius: 0;
-    color: #fff;
-    font-size: 16px;
+/* Estilos para os campos de entrada */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
     padding: 10px;
-    transition: border-color 0.3s ease-in-out;
+    border-radius: 5px;
 }
 
-.form-control:focus {
-    border-color: #fff;
-    box-shadow: none;
-    outline: none;
+/* Estilos para o botão */
+button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
 }
 
-.btn-primary {
-    width: 100%;
-    margin-bottom: 10px;
-    background-color: #00bcd4;
-    border-color: #00bcd4;
-    font-size: 16px;
-    letter-spacing: 1px;
-    transition: background-color 0.3s ease-in-out;
+/* Estilos para o link de registro */
+a.btn-register {
+    margin-left: 10px;
 }
 
-.btn-primary:hover {
-    background-color: #0097a7;
-    border-color: #0097a7;
-}
-
-.btn-register, .btn-back {
-    width: 100%;
-    background-color: transparent;
-    border-color: #fff;
-    color: #fff;
-    font-size: 16px;
-    letter-spacing: 1px;
-    transition: color 0.3s ease-in-out;
-}
-
-.btn-register:hover, .btn-back:hover {
-    color: #00bcd4;
+/* Estilos para responsividade */
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%;
+    }
 }

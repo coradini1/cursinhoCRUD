@@ -31,10 +31,11 @@ public class LoginServlet extends HttpServlet {
 
             String contextPath = request.getContextPath();
             if (usuario != null) {
-                // Successful login, set the "username" and "userId" attributes in the session
+                // Successful login, set the "username", "userId", and "tipoUsuario" attributes in the session
                 HttpSession session = request.getSession();
                 session.setAttribute("username", usuario.getNome());
-                session.setAttribute("userId", usuario.getId()); // Assuming the ID property in Usuario is named "id"
+                session.setAttribute("userId", usuario.getId());
+                session.setAttribute("tipoUsuario", usuario.getTipoUsuario());
                 System.out.println("User ID: " + usuario.getId());
                 // Redirect to the menu page or any other desired page
                 response.sendRedirect(response.encodeRedirectURL(contextPath + "/listarcursos"));
@@ -49,5 +50,4 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect(response.encodeRedirectURL(contextPath + "/erro.jsp"));
         }
     }
-
 }

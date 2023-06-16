@@ -1,4 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<%
+    if (request.getSession(false) == null || request.getSession().getAttribute("username") == null) {
+        response.sendRedirect("block.jsp");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -14,7 +21,7 @@
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Menu</a>
+    <a class="navbar-brand" href="${pageContext.request.contextPath}/listarcursos">Menu</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -22,7 +29,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/listarcursos">Home</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/registrar/registrar-curso.jsp">Registrar Curso</a>
@@ -40,14 +47,15 @@
     <form action="${pageContext.request.contextPath}/atualizar-curso" method="POST">
         <input type="hidden" name="id" value="${curso.id}">
         <div class="form-group">
-            <label for="nome">Name:</label>
-            <input type="text" name="nome" class="form-control" value="${curso.nome}">
+            <label >Name:</label>
+            <input type="text" name="nome" class="form-control" required value="${curso.nome}">
         </div>
         <div class="form-group">
-            <label for="descricao">Description:</label>
-            <textarea name="descricao" class="form-control">${curso.descricao}</textarea>
+            <label >Description:</label>
+            <textarea name="descricao" required class="form-control">${curso.descricao}</textarea>
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" href="menu.jsp" class="btn btn-secondary">Voltar</button>
     </form>
 </div>
 

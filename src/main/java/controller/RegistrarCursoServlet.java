@@ -2,6 +2,7 @@ package controller;
 
 import DAO.CursoDao;
 import model.Curso;
+import model.TipoUsuario;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,6 +24,13 @@ public class RegistrarCursoServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Adicionando a verificação do tipo de usuário
+        TipoUsuario tipoUsuario = (TipoUsuario) request.getSession().getAttribute("tipoUsuario");
+        if (tipoUsuario.equals(TipoUsuario.aluno)) {
+            response.sendRedirect("erro.jsp");
+            return;
+        }
+
         String nome = request.getParameter("nome");
         String descricao = request.getParameter("descricao");
         String contextPath = request.getContextPath();
@@ -39,5 +47,4 @@ public class RegistrarCursoServlet extends HttpServlet {
             response.sendRedirect("erro.jsp");
         }
     }
-
 }

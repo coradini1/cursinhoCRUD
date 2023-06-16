@@ -1,3 +1,4 @@
+<%@ page import="model.TipoUsuario" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -6,6 +7,7 @@
         response.sendRedirect("block.jsp");
         return;
     }
+    TipoUsuario tipoUsuario = (TipoUsuario) session.getAttribute("tipoUsuario");
 %>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -30,28 +32,30 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="#">Início</a>
             </li>
+            <% if (!tipoUsuario.equals(TipoUsuario.aluno)) { %>
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/registrar/registrar-curso.jsp">Registrar Curso</a>
             </li>
+            <% } %>
         </ul>
         <span class="navbar-text">
-            Logged in as <strong><%= session.getAttribute("username") %></strong>
+            Logado como <strong><%= session.getAttribute("username") %></strong>
         </span>
-        <a href="logout.jsp" class="btn btn-danger ml-3">Logout</a>
+        <a href="${pageContext.request.contextPath}/logout" class="btn btn-danger ml-3">Sair</a>
     </div>
 </nav>
 
 <div class="container">
-    <h1>List of Courses</h1>
+    <h1>Lista de cursos cadastrados</h1>
     <table class="table">
         <thead>
         <tr>
             <th>ID</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Actions</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Ações</th>
         </tr>
         </thead>
         <tbody>
@@ -61,8 +65,10 @@
                 <td>${curso.nome}</td>
                 <td>${curso.descricao}</td>
                 <td>
+                    <% if (!tipoUsuario.equals(model.TipoUsuario.aluno)) { %>
                     <a href="${pageContext.request.contextPath}/editar-curso?id=${curso.id}" class="btn btn-primary">Editar</a>
                     <a href="${pageContext.request.contextPath}/remover-curso?id=${curso.id}" class="btn btn-danger">Remover</a>
+                    <% } %>
                 </td>
             </tr>
         </c:forEach>

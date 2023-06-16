@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <title>Cadastrar</title>
 </head>
 
 <body>
 <div class="container">
     <h1>Cadastrar Usuário</h1>
-    <form action="${pageContext.request.contextPath}/registrar" method="POST">
+    <form action="${pageContext.request.contextPath}/registrarUser" method="POST">
         <div class="form-group">
             <label for="nome">Usuário</label>
             <input type="text" name="nome" class="form-control" id="nome" required placeholder="Insira seu nome de usuário">
@@ -34,9 +34,17 @@
             </select>
         </div>
         <button type="submit" name="opcao" class="btn btn-primary" value="Cadastrar">Cadastrar Usuário</button>
-        <a href="../index.jsp" class="btn btn-back">Voltar</a>
+        <a href="${pageContext.request.contextPath}/index.jsp" class="btn btn-back">Voltar</a>
     </form>
 </div>
+<script>
+    <% String errorMessage = (String) request.getAttribute("errorMessage");
+    if (errorMessage != null) { %>
+    window.onload = function() {
+        alert("<%= errorMessage %>");
+    }
+    <% } %>
+</script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script>
