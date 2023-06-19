@@ -1,25 +1,25 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Curso {
     private int id;
     private String nome;
     private String descricao;
     private int professorId;
+    private List<Material> materiais;
 
     public Curso() {
+        materiais = new ArrayList<>();
     }
 
     public Curso(String nome, String descricao, int professorId) {
         this.nome = nome;
         this.descricao = descricao;
         this.professorId = professorId;
+        materiais = new ArrayList<>();
     }
-
-    public Curso(String nome, String descricao) {
-        this.nome = nome;
-        this.descricao = descricao;
-    }
-
 
     public int getId() {
         return id;
@@ -51,5 +51,21 @@ public class Curso {
 
     public void setProfessorId(int professorId) {
         this.professorId = professorId;
+    }
+
+    public List<Material> getMateriais() {
+        return materiais;
+    }
+
+    public void setMateriais(List<Material> materiais) {
+        this.materiais = materiais;
+    }
+
+    public void adicionarMaterial(Material material) {
+        materiais.add(material);
+    }
+
+    public void removerMaterial(Material material) {
+        materiais.remove(material);
     }
 }

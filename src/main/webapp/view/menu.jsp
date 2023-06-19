@@ -48,6 +48,14 @@
                 <a class="nav-link" href="${pageContext.request.contextPath}/registrar/registrar-curso.jsp"><strong>Registrar Curso</strong></a>
             </li>
             <% } %>
+            <% if (!tipoUsuario.equals(TipoUsuario.aluno)) { %>
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/registrar/registrar-material.jsp"><strong>Registrar Material</strong></a>
+            </li>
+            <% } %>
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/listarmateriais"><strong>Listar Materiais</strong></a>
+            </li>
         </ul>
         <span class="navbar-text">
             Logado como <strong><%= session.getAttribute("username") %></strong>
@@ -61,7 +69,6 @@
     <table class="table">
         <thead>
         <tr>
-            <th>ID</th>
             <th>Nome</th>
             <th>Descrição</th>
             <th>Ações</th>
@@ -70,7 +77,6 @@
         <tbody>
         <c:forEach items="${cursos}" var="curso">
             <tr>
-                <td>${curso.id}</td>
                 <td>${curso.nome}</td>
                 <td>${curso.descricao}</td>
                 <td>
