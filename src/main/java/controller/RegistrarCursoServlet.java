@@ -31,6 +31,7 @@ public class RegistrarCursoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             List<Material> materiais = materialDao.getMateriais();
+            System.out.println("Materiais: " + materiais);
             request.setAttribute("materiais", materiais);
             request.getRequestDispatcher("/registrar-curso.jsp").forward(request, response);
         } catch (SQLException e) {
@@ -44,8 +45,6 @@ public class RegistrarCursoServlet extends HttpServlet {
             response.sendRedirect("erro.jsp");
             return;
         }
-
-
 
         String nome = request.getParameter("nome");
         String descricao = request.getParameter("descricao");

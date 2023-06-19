@@ -64,17 +64,17 @@
     </div>
 
     <div class="form-group">
-      <label for="materiais">Materiais</label>
+      <label>Materiais</label>
       <br>
       <c:forEach items="${materiais}" var="material">
-        <label>
-          <input type="checkbox" name="materiaisSelecionados" value="${material.id}">
-            ${material.nome}
-        </label>
-        <br>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="materiaisSelecionados" value="${material.id}" id="material${material.id}">
+          <label class="form-check-label" for="material${material.id}">
+              ${material.nome}
+          </label>
+        </div>
       </c:forEach>
     </div>
-
     <button type="submit" class="btn btn-primary">Registrar Curso</button>
     <a href="${pageContext.request.contextPath}/listarcursos" class="btn btn-primary">Voltar</a>
   </form>

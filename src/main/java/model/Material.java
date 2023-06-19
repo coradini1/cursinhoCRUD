@@ -4,8 +4,10 @@ public class Material {
     private int id;
     private String nome;
     private String descricao;
-    private String nomeArquivo;
-    private byte[] arquivo;
+    private String caminhoArquivo;
+    private int cursoId;
+
+    // getters and setters
 
     public int getId() {
         return id;
@@ -31,19 +33,19 @@ public class Material {
         this.descricao = descricao;
     }
 
-    public String getNomeArquivo() {
-        return nomeArquivo;
+    public String getCaminhoArquivo() {
+        return caminhoArquivo;
     }
 
-    public void setNomeArquivo(String nomeArquivo) {
-        this.nomeArquivo = nomeArquivo;
+    public void setCaminhoArquivo(String caminhoArquivo) {
+        this.caminhoArquivo = caminhoArquivo;
     }
 
-    public byte[] getArquivo() {
-        return arquivo;
+    public int getCursoId() {
+        return cursoId;
     }
 
-    public void setArquivo(byte[] arquivo) {
-        this.arquivo = arquivo;
+    public void setCursoId(int cursoId) {
+        this.cursoId = cursoId;
     }
 }

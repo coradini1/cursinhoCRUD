@@ -20,9 +20,6 @@
       margin-top: 20px;
     }
 
-    .btn-group {
-      margin-top: 10px;
-    }
   </style>
   <title>Listar Materiais</title>
 </head>
@@ -56,7 +53,6 @@
       <th>ID</th>
       <th>Nome</th>
       <th>Descrição</th>
-      <th>Arquivo</th>
       <th>Ações</th>
     </tr>
     </thead>
@@ -66,10 +62,10 @@
         <td>${material.id}</td>
         <td>${material.nome}</td>
         <td>${material.descricao}</td>
-        <td>${material.nomeArquivo}</td>
         <td>
           <div class="btn-group">
-            <a href="${pageContext.request.contextPath}/editar-material?id=${material.id}" class="btn btn-primary">Editar</a>
+            <a href="${pageContext.request.contextPath}/editar-material?id=${material.id}" class="btn btn-primary mr-2">Editar</a>
+            <a href="${pageContext.request.contextPath}/download?id=${material.id}" class="btn btn-success mr-2">Baixar</a>
             <a href="${pageContext.request.contextPath}/remover-material?id=${material.id}" class="btn btn-danger">Remover</a>
           </div>
         </td>

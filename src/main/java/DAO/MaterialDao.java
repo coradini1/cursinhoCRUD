@@ -2,7 +2,6 @@ package DAO;
 
 import model.Material;
 
-import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,36 +13,15 @@ public class MaterialDao {
         this.conn = new MySqlConnection().getConexao();
     }
 
-    public void createMaterial(Material material, InputStream pdfStream) throws SQLException {
-        String sql = "INSERT INTO Materiais (nome, descricao, arquivo_pdf) VALUES (?, ?, ?)";
+    public void createMaterial(Material material) throws SQLException {
+        String sql = "INSERT INTO Materiais (nome, descricao, caminho_arquivo, curso_id) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, material.getNome());
             stmt.setString(2, material.getDescricao());
-            stmt.setBinaryStream(3, pdfStream);
+            stmt.setString(3, material.getCaminhoArquivo());
+            stmt.setInt(4, material.getCursoId());
             stmt.executeUpdate();
         }
-    }
-    public void savePDF(int materialId, InputStream pdfStream) throws SQLException {
-        String sql = "UPDATE Materiais SET arquivo_pdf = ? WHERE id = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setBlob(1, pdfStream);
-            stmt.setInt(2, materialId);
-            stmt.executeUpdate();
-        }
-    }
-
-    public InputStream getPDF(int materialId) throws SQLException {
-        String sql = "SELECT arquivo_pdf FROM Materiais WHERE id = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, materialId);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    Blob blob = rs.getBlob("arquivo_pdf");
-                    return blob.getBinaryStream();
-                }
-            }
-        }
-        return null;
     }
 
     public List<Material> getMateriais() throws SQLException {
@@ -57,6 +35,8 @@ public class MaterialDao {
             material.setId(rs.getInt("id"));
             material.setNome(rs.getString("nome"));
             material.setDescricao(rs.getString("descricao"));
+            material.setCaminhoArquivo(rs.getString("caminho_arquivo"));
+            material.setCursoId(rs.getInt("curso_id"));
             materiais.add(material);
         }
 
@@ -77,6 +57,8 @@ public class MaterialDao {
             material.setId(rs.getInt("id"));
             material.setNome(rs.getString("nome"));
             material.setDescricao(rs.getString("descricao"));
+            material.setCaminhoArquivo(rs.getString("caminho_arquivo"));
+            material.setCursoId(rs.getInt("curso_id"));
             return material;
         }
 
@@ -87,11 +69,13 @@ public class MaterialDao {
     }
 
     public void updateMaterial(Material material) throws SQLException {
-        String sql = "UPDATE Materiais SET nome = ?, descricao = ? WHERE id = ?";
+        String sql = "UPDATE Materiais SET nome = ?, descricao = ?, caminho_arquivo = ?, curso_id = ? WHERE id = ?";
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(1, material.getNome());
         stmt.setString(2, material.getDescricao());
-        stmt.setInt(3, material.getId());
+        stmt.setString(3, material.getCaminhoArquivo());
+        stmt.setInt(4, material.getCursoId());
+        stmt.setInt(5, material.getId());
         stmt.executeUpdate();
         stmt.close();
     }
