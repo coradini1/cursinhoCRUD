@@ -38,15 +38,23 @@ input[type="password"] {
     border-radius: 5px;
 }
 
-/* Estilos para o botão e link de registro */
-button,
-a.btn-register {
-    display: block;
-    width: 100%;
+/* Estilos para o botão */
+button {
     padding: 10px 20px;
     border-radius: 5px;
-    text-align: center;
-    margin-top: 10px;
+    background-color: white;
+    color: black;
+}
+
+/* Estilos para o link de registro */
+a.btn-register {
+    color: blue;
+    margin-left: 10px;
+}
+
+a.btn-back{
+    color: blue;
+    margin-left: 10px;
 }
 
 /* Estilos para responsividade */

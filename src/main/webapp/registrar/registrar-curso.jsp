@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%
   if (request.getSession(false) == null || request.getSession().getAttribute("username") == null) {
     response.sendRedirect("block.jsp");
@@ -60,6 +62,19 @@
       <label for="descricao">Descrição do Curso</label>
       <textarea name="descricao" id="descricao" class="form-control" required></textarea>
     </div>
+
+    <div class="form-group">
+      <label for="materiais">Materiais</label>
+      <br>
+      <c:forEach items="${materiais}" var="material">
+        <label>
+          <input type="checkbox" name="materiaisSelecionados" value="${material.id}">
+            ${material.nome}
+        </label>
+        <br>
+      </c:forEach>
+    </div>
+
     <button type="submit" class="btn btn-primary">Registrar Curso</button>
     <a href="${pageContext.request.contextPath}/listarcursos" class="btn btn-primary">Voltar</a>
   </form>
