@@ -40,7 +40,6 @@ public class DownloadServlet extends HttpServlet {
                 if (file.exists()) {
                     String mimeType = Files.probeContentType(file.toPath());
                     if (mimeType == null) {
-                        // mimeType não foi detectado, definir padrão
                         mimeType = "application/octet-stream";
                     }
                     response.setContentType(mimeType);

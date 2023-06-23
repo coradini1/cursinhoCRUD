@@ -55,15 +55,12 @@ public class RegistrarCursoServlet extends HttpServlet {
         try {
             cursoDao.createCurso(curso);
 
-            // Obtenha os IDs dos materiais selecionados do formulário
+
             String[] materiaisSelecionados = request.getParameterValues("materiaisSelecionados");
             if (materiaisSelecionados != null) {
-                // Converta os IDs dos materiais para uma lista de inteiros
                 List<String> materiaisIds = Arrays.asList(materiaisSelecionados);
                 for (String materialId : materiaisIds) {
-                    // Obtenha o material pelo ID
                     Material material = materialDao.getMaterialById(Integer.parseInt(materialId));
-                    // Vincule o material ao curso
                     cursoDao.vincularMaterial(curso.getId(), material.getId());
                 }
             }
