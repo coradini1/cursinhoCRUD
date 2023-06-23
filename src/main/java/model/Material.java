@@ -7,8 +7,6 @@ public class Material {
     private String caminhoArquivo;
     private int cursoId;
 
-    // getters and setters
-
     public int getId() {
         return id;
     }

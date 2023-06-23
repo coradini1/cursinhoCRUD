@@ -60,10 +60,8 @@ public class RegistrarMaterialServlet extends HttpServlet {
     private String saveFileToLocal(Part arquivoPDF, String fileName) throws IOException {
         String uploadPath = getServletContext().getRealPath("") + File.separator + "uploads";
         File uploadDir = new File(uploadPath);
-        if (!uploadDir.exists()) uploadDir.mkdir(); // Cria o diretório se ele não existir
-
-        arquivoPDF.write(uploadPath + File.separator + fileName); // Salva o arquivo
-
+        if (!uploadDir.exists()) uploadDir.mkdir();
+        arquivoPDF.write(uploadPath + File.separator + fileName);
         return uploadPath + File.separator + fileName;
     }
 
